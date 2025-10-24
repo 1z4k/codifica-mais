@@ -1,0 +1,27 @@
+CREATE DATABASE gestao_produtos;
+
+USE gestao_produtos;
+
+CREATE TABLE fornecedores (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    razao_social VARCHAR(255) NOT NULL,
+    cnpj VARCHAR(18) UNIQUE NOT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    atualizado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deletado_em TIMESTAMP NULL
+);
+
+CREATE TABLE produtos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    descricao TEXT,
+    categoria VARCHAR(100),
+    preco DECIMAL(10,2) NOT NULL,
+    peso DECIMAL(10,3),
+    quantidade INT NOT NULL,
+    fornecedor INT,
+    FOREIGN KEY (fornecedor) REFERENCES fornecedores(id),
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    atualizado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deletado_em TIMESTAMP NULL
+);
